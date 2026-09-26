@@ -1,0 +1,348 @@
+:root {
+    --bg-color: #121417;
+    --lamp-shade: #a5f9e6;
+    --lamp-base: #d1ccc2;
+    --glow-color: rgba(255, 214, 110, 0.25);
+    --accent-color: #d4a373;
+    --transition: cubic-bezier(0.4, 0.2, 1);
+    --on: 1;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: var(--bg-color);
+    font-family: "Inter", system-ui, sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    transition: background 0.5s ease;
+}
+
+/* Background Glow */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 40%,
+            var(--glow-color),
+            transparent 70%);
+    opacity: var(--on);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Lamp */
+.lamp-wrapper {
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: lampFloat 4s ease-in-out infinite;
+}
+
+.lamp-svg {
+    width: 100%;
+    height: 400px;
+    overflow: visible;
+}
+
+/* Lamp Shade */
+.lamp-shade {
+    fill: var(--lamp-shade);
+    stroke: var(--lamp-base);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 20px var(--glow-color));
+    transition: 0.5s ease;
+}
+
+/* Lamp Stand & Base */
+.lamp-base {
+    fill: var(--lamp-base);
+}
+
+/* Inner Glow */
+.inner-glow {
+    fill: var(--glow-color);
+    filter: blur(8px);
+    opacity: var(--on);
+    transition: 0.5s ease;
+}
+
+/* Pull Cord */
+.pull-cord {
+    cursor: pointer;
+    transform-origin: 130px 110px;
+}
+
+.cord-line {
+    stroke: var(--lamp-base);
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.cord-bead {
+    fill: var(--accent-color);
+    stroke: var(--lamp-base);
+    stroke-width: 2;
+}
+
+.cord-hit {
+    cursor: pointer;
+}
+
+/* Lamp Text */
+.lamp-text {
+    color: #aaa;
+    font-size: 14px;
+    margin-top: -20px;
+    letter-spacing: 1px;
+
+}
+
+/* Auth Wrapper */
+
+
+/* IMPORTANT:
+   Form initially hidden */
+.auth-wrapper {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+/* Form Show */
+.auth-wrapper.show-form {
+    display: block;
+    animation: formAppear 0.5s ease;
+}
+
+/* Auth Box */
+.auth-box {
+    padding: 45px 40px;
+}
+
+.auth-box h1 {
+    color: #29223f;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.auth-box>p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: #433b5e;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #eeeaf7;
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px #8b5cf622;
+}
+
+/* Form Options */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.remember {
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-options a {
+    color: #7956ed;
+    text-decoration: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg,
+            #7155ed,
+            #a855f7);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px #8b5cf655;
+}
+
+/* Switch */
+.switch-text {
+    text-align: center;
+    margin-top: 25px;
+    color: #888;
+    font-size: 14px;
+}
+
+.switch-text a {
+    color: #7956ed;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Hidden */
+.hidden {
+    display: none;
+}
+
+/* Lamp ON / OFF */
+body.lamp-on {
+    --on: 1;
+}
+
+body.lamp-off {
+    --bg-color: #08090b;
+    --glow-color: rgba(255, 214, 110, 0);
+    --on: 0;
+}
+
+body.lamp-off .lamp-shade {
+    fill: #555;
+    filter: none;
+}
+
+body.lamp-off .inner-glow {
+    opacity: 0;
+}
+
+/* Animations */
+
+@keyframes lampFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes formAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .lamp-wrapper {
+        width: 280px;
+        height: 320px;
+    }
+
+    .lamp-svg {
+        height: 280px;
+    }
+
+    .auth-wrapper {
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 35px 25px;
+    }
+
+    .auth-box h1 {
+        font-size: 27px;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lamp-wrapper {
+        animation: none;
+    }
+}
